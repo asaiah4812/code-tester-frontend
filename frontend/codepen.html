@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamerWebdev</title>
+    <link rel="stylesheet" href="static/css/codepen.css">
+ <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+</head>
+<body>
+    <nav class="navigation">
+        <div class="nav-left">
+           <box-icon name='code-alt' color="white"></box-icon> LIVE EDITOR
+        </div>
+        <div class="nav-right">
+            <button>Settings</button>
+            <div class="list" >
+                <box-icon onclick="openWork()" style="background: white;" name='list-ul'></box-icon>
+                <div class="work">
+                    <h4>My Current Projects name</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Home</a></li>
+                    </ul>
+                </div>
+            </div>
+            <button>Signup</button>
+            <button>Login</button>
+        </div>
+        <div class="sidebar">
+            <button onclick="closeSide()"><box-icon name='window-close' color='#ffffff' ></box-icon></button>
+            <button>Settings</button>
+            <button>Signup</button>
+            <button>Login</button>
+        </div>
+        <div class="menu" onclick="showSide()"><box-icon name='menu' color="#ffff"></box-icon></div>
+    </nav>
+    <div class="container">
+        <div class="left">
+            <label for="html-code" class="label"><box-icon name='html5' type='logo' color='#ffffff' ></box-icon> HTML</label>
+            <textarea class="code" aria-current="false" id="html-code" onkeyup="run()"></textarea>
+            <label for="css-code" class="label"><box-icon name='css3' type='logo' color='#ffffff' ></box-icon> CSS</label>
+            <textarea class="code" id="css-code" onkeyup="run()"></textarea>
+            <label for="js-code" class="label"><box-icon name='javascript' type='logo' color='#ffffff' ></box-icon>  Javascript</label>
+            <textarea class="code"  id="js-code" onkeyup="run()"></textarea>
+            <button type="submit" class="btn">Save</button>
+        </div>
+        <div class="right">
+            <label class="label">▶ Output</label>
+             <iframe id="output"></iframe>
+        </div>
+    </div>
+    <script>
+        function run() {
+            let htmlCode = document.getElementById("html-code").value;
+            let cssCode = document.getElementById("css-code").value;
+            let jsCode = document.getElementById("js-code").value;
+
+            let output = document.getElementById("output")
+            output.contentDocument.body.innerHTML = htmlCode + "<style>" + cssCode + "</style>"
+            output.contentWindow.eval(jsCode);
+            save()
+        }
+
+        function showSide(){
+            document.querySelector('.sidebar').style.display = "flex"
+        }
+
+        function closeSide(){
+            document.querySelector('.sidebar').style.display = "none"
+        }
+        function openWork(){
+            if (document.querySelector('.work').style.display === "block"){
+                document.querySelector('.work').style.display = "none"
+            } else{
+                document.querySelector('.work').style.display = "block"
+            }
+        }
+        function save(){
+            localStorage.setItem("data", htmlCode.value)
+        }
+        function getSave(){
+            htmlCode.value = localStorage.getItem("data")
+        }
+        getSave()
+    </script>
+</body>
+</html>
